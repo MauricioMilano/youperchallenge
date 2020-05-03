@@ -97,15 +97,15 @@ function processUnity(unit) {
     if (unit.type === types.textarea) this.processTextarea(unit);
     if (unit.type === types.condition) this.processCondition(unit);
 }
+
+// process responses 
 function processResponseOnly(unit) {
     printMessage(unit, "Bot");
     processUnity(getUnits(unit.nextUnit));
 }
 function processTextarea(unit) {
-    let input = angular.element(document.querySelector('#input'));
     printMessage(unit, "Bot")
-    input.append(`<input type='textarea' id="textarea"  class='input' onkeypressed="onButtonPressed(event,'${unit.nextUnit}')"> `)
-    input.append(`<button class="button btn-send" onclick="sendTextAreaMessage('${unit.nextUnit}')">Enviar</button>`)
+    printTextarea(unit)
 }
 function sendTextAreaMessage(nextUnit) {
     let input = angular.element(document.querySelector('#textarea'));
@@ -121,12 +121,9 @@ function processCondition(unit) {
     })
 }
 function processOption(units) {
-    let input = angular.element(document.querySelector('#input'));
-
     printMessage(units, "Bot");
     units.options.forEach(function (element) {
-        const elementTreated = element.label.replace(".", "\'");
-        input.append(`<a id="btn" class="button button-options" onclick="processOptionChoosed('${element.label}','${element.nextUnit}')" >${elementTreated}</button>`)
+        printButton(element);
     });
 
 }
@@ -134,33 +131,47 @@ function processOptionChoosed(label, nextUnit) {
     printMessage(null, "User", label)
     processUnity(getUnits(nextUnit))
 }
+
+// Functions to print message 
 function printMessage(units, author, messageText = null) {
     let message = { author: author }
-    
     if (units) {
-        units.responses.forEach(function(element){
+        units.responses.forEach(function (element) {
             message.response = element;
-            pushMessage(message);            
+            pushMessage(message);
         })
     }
     if (!units) {
         message.response = messageText;
         pushMessage(message);
-    } 
+    }
     chatScroll()
-
     cleanInputs();
 
 }
-
-function pushMessage(message){
+// chat functions
+function printButton(element) {
+    let input = angular.element(document.querySelector('#input'));
+    const elementTreated = element.label.replace(".", "\'");
+    input.append(`<a id="btn" class="button button-options" onclick="processOptionChoosed('${element.label}','${element.nextUnit}')" >${elementTreated}</button>`)
+}
+function printTextarea(unit) {
+    let input = angular.element(document.querySelector('#input'));
+    input.append(`<input type='textarea' id="textarea"  class='input' onkeypressed="onButtonPressed(event,'${unit.nextUnit}')"> `)
+    input.append(`<button class="button btn-send" onclick="sendTextAreaMessage('${unit.nextUnit}')">Send</button>`)
+}
+function pushMessage(message) {
     let input = angular.element(document.querySelector('#content'));
     const responseTreated = message.response.replace(".", "\'");
     if (message.author === "Bot") {
-        input.append(`<li class="bot-msg">${responseTreated}<span class="date">00:00</span></li>`);
+        setTimeout(function (){
+            input.append(`<li class="bot-msg">${responseTreated}<span class="date">00:00</span></li>`);
+        },1000)
     }
     if (message.author === "User") {
-        input.append(`<li class="user-msg">${responseTreated}<span class="date">00:00</span></li>`);
+        setTimeout(function (){
+            input.append(`<li class="user-msg">${responseTreated}<span class="date">00:00</span></li>`);
+        },500)
     }
 }
 function cleanInputs() {
@@ -171,27 +182,20 @@ function cleanInputs() {
     input.remove();
     buttons.remove()
 }
+// function to scroll chat 
 function chatScroll() {
     setTimeout(() => {
         const objDiv = document.getElementById("content");
-        if(objDiv)
-        objDiv.scrollTop = objDiv.scrollHeight;
-    }, 300);
+        if (objDiv)
+            objDiv.scrollTop = objDiv.scrollHeight;
+    }, 1300);
     setTimeout(() => {
         const objDiv = document.getElementById("content");
-        if(objDiv)
-        objDiv.scrollTop = objDiv.scrollHeight;
-    }, 600);
+        if (objDiv)
+            objDiv.scrollTop = objDiv.scrollHeight;
+    }, 1600);
 
-}
-function onButtonPressed(event,nextUnit){
-    const ENTER_CODE = "Enter"
-    console.log("hi")
-    let input = angular.element(document.querySelector('#input'))[0].value;
-    if (event.code===ENTER_CODE){
-        sendTextAreaMessage(nextUnit)
-      }
 }
 setTimeout(function () {
     processUnity(getUnits(0));
-}, 3000)
+}, 2000)
