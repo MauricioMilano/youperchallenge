@@ -4,6 +4,7 @@
   "description": "An Ionic project",
   "devDependencies": {
     "@capacitor/cli": "2.0.2",
+    "@ionic/lab": "3.1.4",
     "@ionic/v1-toolkit": "^1.0.0",
     "gulp": "^3.5.6",
     "gulp-clean-css": "^3.7.0",
