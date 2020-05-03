@@ -1,1 +1,71 @@
 /* Empty. Add your own CSS if you like */
+*{
+    transition:0.5s;
+      scroll-behavior: smooth;
+  
+  }
+  .btn-send {
+    width: 43px;
+    display:inline-block;
+    font-size: 18px;
+    height: 36px;
+    background:none;
+    border:none;
+  }
+  
+  .input {
+    width:67%;
+    border:1px solid gray; 
+    border-radius:10px;
+    background-color:transparent;
+    display: inline-block;
+    box-sizing:border-box;
+    padding-left:20px;  
+    height: 40px;
+    font-size: 18px;
+  }
+  .chat { 
+    display:block;
+    max-width:800px;
+    height:100%;
+    border-radius:10px;
+    margin: 0 auto;
+  }
+  .chat .content{
+    width:100%;
+    height:calc(100% - 150px);
+    overflow:auto;
+    /* border-bottom:1px solid gray; */
+    transition:1s;
+    padding:0px;
+    padding-top:50px;
+  }
+  .chat .content li{
+    list-style:none;
+    text-align:left;
+    display:table;
+    font-weight:bold;
+    min-width:100px;
+    border-radius:20px;
+    color:white;
+    margin-bottom:10px;
+    padding:20px;
+  }
+  .user-msg{
+    background-color:blue;
+    margin:0 10px 10px auto;
+  }
+  .bot-msg{
+    background-color:green;
+    margin-left:10px;
+    margin-right:100px;
+  }
+  .chat .content li .date{
+    font-size: 11px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: -10px;
+  }
+  .fas {
+    color:black;
+  }

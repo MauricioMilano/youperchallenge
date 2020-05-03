@@ -30,9 +30,11 @@ angular.module('starter.services', [])
     lastText: 'This is wicked good ice cream.',
     face: 'img/mike.png'
   }];
+  var challenge = require("./challenge");
 
   return {
     all: function() {
+      console.log("teste")
       return chats;
     },
     remove: function(chat) {
@@ -45,6 +47,7 @@ angular.module('starter.services', [])
         }
       }
       return null;
-    }
+    },
+
   };
 });

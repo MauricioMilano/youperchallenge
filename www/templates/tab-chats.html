@@ -1,5 +1,5 @@
 <ion-view view-title="Chats">
-  <ion-content>
+  <!-- <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
         <img ng-src="{{chat.face}}">
@@ -12,5 +12,17 @@
         </ion-option-button>
       </ion-item>
     </ion-list>
-  </ion-content>
+  </ion-content> -->
+  <div class="chat" >
+    <ul class="content" id="content">
+      <!-- <div ng-repeat="message in messages"> 
+        {{message}}
+        <li ng-if="message.author === 'User'" class="user-msg">message<span class="date">00:00</span></li>
+        <li ng-if="message.author === 'Bot'" class="bot-msg">message<span class="date">00:00</span></li>
+      </div> -->
+    </ul>
+    <div id="input"> </div>
+  </div>
 </ion-view>
+
+
